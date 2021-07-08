@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Övning5", "Övning5\Övning5.csproj", "{F78243BB-43CE-4513-AC29-F3CA492E47BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Övning5Tests", "Övning5Tests\Övning5Tests.csproj", "{47B43398-C4F8-4606-9D87-1B7800A25D86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F78243BB-43CE-4513-AC29-F3CA492E47BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78243BB-43CE-4513-AC29-F3CA492E47BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78243BB-43CE-4513-AC29-F3CA492E47BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78243BB-43CE-4513-AC29-F3CA492E47BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B43398-C4F8-4606-9D87-1B7800A25D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B43398-C4F8-4606-9D87-1B7800A25D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B43398-C4F8-4606-9D87-1B7800A25D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B43398-C4F8-4606-9D87-1B7800A25D86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53427420-8CBF-4179-BB4A-7F87981EB4E1}
+	EndGlobalSection
+EndGlobal
