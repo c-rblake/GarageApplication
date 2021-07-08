@@ -25,6 +25,8 @@ namespace Övning5
                 + "\n2. List all vehicles"
                 + "\n3. Search for a Vehicle with ID. "
                 + "\n4. BIG Search for a Vehicle with anything. "
+                + "\n5. Remove a single Vehicle. "
+                + "\n6. Add A Vehicle with ID, COLOR, and, number of WHEELS.(Auto-park included) "
                 + "\n0. Exit");
         }
     }

@@ -73,7 +73,29 @@ namespace Övning5
 
         }
 
-
+        internal void RemoveVehicle(int index)
+        {
+            try
+            {
+                if (vehicles[index] != null)
+                {
+                    Console.WriteLine($"Vehicle has been removed at {index}");
+                    vehicles[index] = null;
+                    count--;
+                }
+                else
+                {
+                    Console.WriteLine($"There was no vechicle at {index}");
+                    Console.WriteLine($"Try again or use another method to find the Vehicle");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine($"Could not remove Vehicle at {index} the Garage is not of that size");
+                Console.WriteLine($"Try the List Vehicles method too find the position of the vehicle");
+                //Console.WriteLine($"Try the PrintSize method to find the size of the car");
+            }
+        }
 
 
     }

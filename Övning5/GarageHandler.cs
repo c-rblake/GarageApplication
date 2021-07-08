@@ -50,6 +50,11 @@ namespace Övning5
                         }
                         break;
                     case "3":
+                        if (MyGarage.Count == 0)
+                        {
+                            Ui.Print("Nothing in Garage");
+                            break;
+                        }
                         try
                         {
                             Vehicle searchResult = FindMyVehicle();
@@ -72,6 +77,21 @@ namespace Övning5
                             Ui.Print("More vehicles could not be found");
                             break;
                         }
+                    case "5":
+                        Remove();
+
+                        break;
+                    case "6":
+                        try
+                        {
+                            AddVehicle();
+                            break;
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Ui.Print("More vehicles could not be found");
+                            break;
+                        }
                     default:
                         Ui.Print("Invalid Input. Try a Menu option");
                         break;
@@ -81,6 +101,64 @@ namespace Övning5
 
             }
             
+        }
+
+        private void AddVehicle()
+        {
+            Ui.Print("please enter the ID of the Vehicle");
+            string id = Ui.ReadKey();
+            Ui.Print("please enter the Color of the Vehicle");
+            string color = Ui.ReadKey();
+            Ui.Print("please enter the number of wheels of the Vehicle");
+            string wheels = Ui.ReadKey();
+            try
+            {
+                int result = Int32.Parse(wheels);
+                Vehicle newVehicle = new(id, color, result);
+                MyGarage.ParkVehicle(newVehicle);
+            }
+            catch (NullReferenceException)
+            {
+                Ui.Print("Vehicle could not be created");
+
+            }
+
+
+           
+            // WHAT KIND OF VEHICLE WOULD YOU WANT?
+
+        }
+
+        private void Remove()
+        {
+            bool removeVehicle = true; // NOT EXITING A LOOP IS GOOD WHEN TESTING IN CONSOLE.
+            do
+            {
+                Ui.Print("Please enter the index of the car you want to remove. 0 Indexing does apply!");
+                string input = Ui.ReadKey();
+                try
+                {
+                    int result = Int32.Parse(input);
+                    if (result >= 0 || result <= MyGarage.Size)
+                    {
+                        Ui.Print($"Trying to remove Vehicle at {input}");
+                        MyGarage.RemoveVehicle(result);
+                        removeVehicle = false;
+                    }
+                    else
+                    {
+                        Ui.Print($"Unable to comply with '{input}'");
+                    }
+
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+
+            } while (removeVehicle); 
+
+
         }
 
         private void SetGarageSize()
@@ -188,71 +266,15 @@ namespace Övning5
                         //goto OutLoop;
                         break;
                     }
-                    //if(prop.GetValue(item) is int)
-                    //{
-                    //    stringProperty = prop.GetValue(item).ToString();
-                    //    if(stringProperty == searchTerm)
-                    //    {
-                    //        Ui.Print($"Possible match found \n{item.Stats()}");
-                    //        goto OutLoop;
-                    //    }
-                    //    continue; // End of Int Checker
-                    //}
-                    //if (prop.GetValue(item) == searchTerm)
-                    //{ 
-                    //    Ui.Print($"Possible match found \n{item.Stats()}");
-                    //    goto OutLoop;
-                    //}
 
-                        //Console.WriteLine($"{ prop.ToString()}, { prop.GetValue(item)}");
                 }
-
-
-
-                //foreach (var prop in props) // yield return. 
-                //ToLower on all properties on instantiation?
-                //if attribute in props return....
-                //{
-                //    if(prop.GetValue(t).ToString().ToLower() == searchTerm)
-                //    {
-                //        Ui.Print($"Possible match found \n{item.Stats()}");
-                //        Ui.Print(t.Name);
-                //        goto OutLoop;
-                //    }
-                //}
 
             }
 
         }
-        //var result = MyGarage.ReturnIfTrue(CheckProps());
-        //return result;
-        //}
 
-        //public virtual bool CheckProps(string input) // Extension method
-        //{
 
-        //    Type t = this.GetType();
-        //    if (input == t.Name.ToLower()) return true; // Breaks on Type
-        //    PropertyInfo[] props = t.GetProperties(); //REFLECTION
-        //    foreach (var prop in props)
-        //    {
-        //        if (prop.GetValue(this).ToString().ToLower() == input) return true;
-        //    }
-        //    return false;
-        //}
 
-        //internal IEnumerable<T> ReturnIfTrue<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-        //{
-        //    if (source is null) throw new ArgumentNullException(nameof(source));
-        //    if (predicate is null) throw new ArgumentNullException(nameof(predicate));
-
-        //    foreach (var item in source)
-        //    {
-        //        //yield return item; // Everything is returned
-        //        if (predicate(item)) yield return item;
-        //    }
-        //}
-        
 
     }
 }
