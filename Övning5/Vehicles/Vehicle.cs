@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -28,7 +29,7 @@ namespace Övning5
         }
 
         //https://docs.microsoft.com/en-us/dotnet/api/system.type.getproperties?view=net-5.0
-        public virtual string Stats() //3.2.2
+        public virtual string Stats() // Can override in subclasses
         {
             //var result = new StringBuilder();
             //PropertyInfo[] myPropertyInfo;
@@ -43,12 +44,16 @@ namespace Övning5
                 if (prop.GetIndexParameters().Length == 0)
                     result.AppendLine($"   {prop.Name} ({prop.PropertyType.Name}): {prop.GetValue(this)}");
                 else
-                    Console.WriteLine($"   {prop.Name} ({prop.PropertyType.Name}): <Indexed>"
-                                         );
+                    Console.WriteLine($"   {prop.Name} ({prop.PropertyType.Name}): <Indexed>");
+
             return result.ToString();
-
-
-
         }
+
+        
+
+
+
+
+
     }
 }

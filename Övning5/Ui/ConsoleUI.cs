@@ -20,9 +20,11 @@ namespace Övning5
         public void ViewMenu()
         {
             //Console.Clear();
-            Console.WriteLine("\n1. Seed The Garage. (Works once, adds 4 vehicles)"
+            Console.WriteLine("" +
+                "\n1. Seed The Garage. (Works once, adds 4 vehicles)"
                 + "\n2. List all vehicles"
-                + "\n3. Populera garaget med några fordon. "
+                + "\n3. Search for a Vehicle with ID. "
+                + "\n4. BIG Search for a Vehicle with anything. "
                 + "\n0. Exit");
         }
     }
