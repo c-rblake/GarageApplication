@@ -6,15 +6,18 @@ namespace Övning5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GarageApplication garage = new GarageApplication();
+            garage.Run();
 
-            Garage<Vehicle> myGarage = new(5);
+            //Console.WriteLine("Hello World!");
 
-            Vehicle vehicle = new Vehicle("abc123", "pink", 5);
+            //Garage<Vehicle> myGarage = new(5);
 
-            myGarage.ParkVehicle(vehicle);
+            //Vehicle vehicle = new Vehicle("abc123", "pink", 5);
 
-            Console.WriteLine(vehicle.ToString());
+            //myGarage.ParkVehicle(vehicle);
+
+            //Console.WriteLine(vehicle.ToString());
 
         }
     }

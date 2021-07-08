@@ -11,6 +11,11 @@ namespace Övning5
     [TestClass]
     public class GarageTest
     {
+        Garage<Vehicle> myGarage = new(5);
+
+        Vehicle testCar = new Vehicle("abc123", "green", 6);
+
+
         [TestMethod]
         public void CreateGarage()
         {
@@ -20,6 +25,17 @@ namespace Övning5
             // Act
             int actual = garage.Size;
             // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void AddVehicleTest()
+        {
+            const int expected = 2;
+            myGarage.ParkVehicle(testCar);
+            myGarage.ParkVehicle(testCar);
+            int actual = myGarage.Count;
+
             Assert.AreEqual(expected, actual);
         }
     }

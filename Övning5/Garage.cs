@@ -13,6 +13,7 @@ namespace Övning5
         /* #endregion */
         
         public int Size { get; }
+        public int Count => count;
 
         /* #region Constructor */
         public Garage(int size)
@@ -67,8 +68,6 @@ namespace Övning5
                     return $"Vehicle with id {vehicle.Id} has been removed from spot {i}";
                 }
             }
-
-
         return $"Vehicle {vehicle.Id} is not parked in the Garage";
 
         }
