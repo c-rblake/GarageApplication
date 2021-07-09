@@ -50,7 +50,7 @@ namespace Övning5
                     vehicles[i] = vehicle;
                     count++;
                     vehicle.ParkingSpot = i;
-                    ui.Print($"Vehicle parked at {i}");
+                    ui.Print($"Vehicle has been parked at spot no: {i}");
                     break;
                 }
             }

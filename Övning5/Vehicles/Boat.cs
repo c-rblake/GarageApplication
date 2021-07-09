@@ -2,7 +2,7 @@
 {
     internal class Boat : Vehicle
     {
-        public Boat(string id, string color, int wheels, float cylinderVolume) : base(id, color, wheels)
+        public Boat(string id, string color, int wheels, int cylinderVolume) : base(id, color, wheels)
         {
             Id = id;
             Color = color;
@@ -13,6 +13,6 @@
         public string Id { get; }
         public string Color { get; }
         public int Wheels { get; }
-        public float CylinderVolume { get; }
+        public int CylinderVolume { get; }
     }
 }

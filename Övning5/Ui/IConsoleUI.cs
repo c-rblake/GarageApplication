@@ -6,5 +6,7 @@
 
         void ViewMenu();
         string ReadKey();
+
+        public void createVehicle();
     }
 }

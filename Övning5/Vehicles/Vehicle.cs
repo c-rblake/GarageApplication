@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Övning5
 {
-    public class Vehicle : IVehicle
+    public abstract class Vehicle : IVehicle // abstract
     {
         private string id;
         private string color;

@@ -26,7 +26,19 @@ namespace Övning5
                 + "\n3. Search for a Vehicle with ID. "
                 + "\n4. BIG Search for a Vehicle with anything. "
                 + "\n5. Remove a single Vehicle. "
-                + "\n6. Add A Vehicle with ID, COLOR, and, number of WHEELS.(Auto-park included) "
+                + "\n6. Add A Vehicle with Id, Color, Wheels and any idiosyncratic attribute.(Auto-park included)"
+                + "\n0. Exit");
+        }
+        public void createVehicle()
+        {
+            Console.Clear();
+            Console.WriteLine("" +
+                "\n1. Create Airplane"
+                + "\n2. Create Boat"
+                + "\n3. Create Bus"
+                + "\n4. Create Car"
+                + "\n5. Create MotorCycle"
+                + "\n6. Create Nothing"
                 + "\n0. Exit");
         }
     }

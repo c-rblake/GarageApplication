@@ -83,18 +83,21 @@ namespace Övning5
                         Remove();
 
                         break;
-                    case "6":
-                        try
-                        {
-                            AddVehicle();
-                            break;
-                        }
-                        catch (NullReferenceException)
-                        {
-                            Ui.Print("Null Exception Not handeled in membership test");
+                    //case "999":
+                    //    try
+                    //    {
+                    //        AddVehicle();
+                    //        break;
+                    //    }
+                    //    catch (NullReferenceException)
+                    //    {
+                    //        Ui.Print("Null Exception Not handeled in membership test");
                             
-                            break;
-                        }
+                    //        break;
+                    //    }
+                    case "6":
+                        VehicleCreation();
+                        break;
                     default:
                         Ui.Print("Invalid Input. Try a Menu option");
                         break;
@@ -103,10 +106,173 @@ namespace Övning5
 
 
             }
-            
+
         }
 
-        private void AddVehicle()
+        private void VehicleCreation()
+        {
+            Ui.createVehicle();
+            string input = Ui.ReadKey();
+            switch(input)
+            {
+                case "0":
+                    Environment.Exit(0);
+                    break; // CANNOT REUSE VARIABLE NAMES HERE FOR DIFFERENT CASES...
+                case "1": // GET INT Would be better to get Constructor properties and run through.. // Todo http://dotnetpattern.com/csharp-reflection-constructors
+                    string id = GetID(); // GetString and Get int. Id is different because of check in current garage.
+                    string color = GetColor();
+                    int wheels = GetInt("Wheels"); 
+                    int engines = GetInt("Engines");
+                    Airplane airplane = new(id, color, wheels, engines);
+                    MyGarage.ParkVehicle(airplane);
+                    break;
+                case "2":
+                    var (a,b,c,d) = MakeVehicle("Wheels", "CylinderVolume");
+                    Boat myBoat = new(a, b, c, d);
+                    MyGarage.ParkVehicle(myBoat);
+                    break;
+                case "3":
+                    MakeVehicleTwo("Wheels", "b");
+                    break;
+                case "4":
+                    MakeVehicleTwo("Wheels", "c");
+                    break;
+                case "5":
+                    MakeVehicleTwo("Wheels", "m");
+                    break;
+
+            }
+        }
+
+
+        private (string id, string color, int wheels, int engines) MakeVehicle(string message1, string message2) //OUt string title  https://marklowg.medium.com/packing-and-unpacking-with-c-tuples-e2d07b44d993
+        {
+            string id = GetID();
+            string color = GetColor();
+            int wheels = GetInt(message1);
+            int unknown = GetInt(message2);
+            return (id, color, wheels, unknown);
+        }
+        private void MakeVehicleTwo(string message1, string type) //All to avoid tuple unpacking ;..; *args ... ** kwargs...
+        {
+            string id = GetID();
+            string color = GetColor();
+            int wheels = GetInt(message1);
+            if(type == "b")
+            {
+                string fuel = GetString("Fuel type");
+                Bus bus = new(id, color, wheels, fuel);
+                MyGarage.ParkVehicle(bus);
+            }
+            if(type == "c")
+            {
+                int seats = GetInt("number of seats");
+                Car car = new(id, color, wheels, seats);
+                MyGarage.ParkVehicle(car);
+            }
+            if (type == "m")
+            {
+                int lenght = GetInt("lenght");
+                MotorCycle motorCycle = new(id, color, wheels, lenght);
+                MyGarage.ParkVehicle(motorCycle);
+            }
+
+        }
+
+        private string GetString(string message)
+        {
+            string fuel;
+
+            bool fuelIsNotSet = true;
+            do
+            {
+                Ui.Print($"please enter a {message} Diesel or Petrol");
+                fuel = Ui.ReadKey();
+                if (fuel.ToLower() == "diesel" | fuel.ToLower() == "petrol")
+                {
+                    // return fuel; code complains about that
+                    fuelIsNotSet = false;
+                }
+            } while (fuelIsNotSet);
+            return fuel;
+        }
+
+        private string GetID() // Validate Lenght == 6
+        {
+            string id;
+            bool membership = true;
+            do
+            {
+                bool digitNotSix = true;
+                do
+                {
+                    Ui.Print("please enter a six letter/digit ID of the Vehicle");
+                    id = Ui.ReadKey();
+                    if (id.Length == 6)
+                    {
+                        digitNotSix = false;
+                    }
+                    else
+                    {
+                        Ui.Print("Six characters or stuck forever in this loop.");
+                    }
+
+                } while (digitNotSix);
+
+                try
+                {
+                    membership = MyGarage.Any(a => a.Id == id);
+                }
+                catch (NullReferenceException)
+                {
+                    membership = false;
+                }
+
+                //membership =  true;
+                if (membership)
+                {
+                    Ui.Print("That ID is already Taken. Try another like password123.");
+                }
+
+            } while (membership);
+            return id;
+        }
+        private string GetColor() // Validate?? Enum of Choices maybe
+        {
+            Ui.Print("please enter the Color of the Vehicle");
+            string color = Ui.ReadKey();
+            return color;
+        }
+        private int GetInt(string message)
+        {
+            int result = 0;
+            bool wheelsNotInt = true;
+            do
+            {
+                Ui.Print($"please enter the number of {message} of the Vehicle");
+                string wheels = Ui.ReadKey();
+                try
+                {
+                    result = Int32.Parse(wheels);
+                    wheelsNotInt = false;
+                }
+                catch (Exception)
+                {
+                    Ui.Print($"{wheels} was not accepted as an input. Try 1 for unicycle. 2 For bike. 3 For that blue car in mr Bean and so on.");
+                }
+
+            } while (wheelsNotInt);
+            
+            return result;
+
+
+        }
+
+        //        foreach (ConstructorInfo item in type.GetConstructors())
+        //{
+        //    Console.WriteLine("Name: " + item.Name + ", IsPublic: " + item.IsPublic + ", IsPrivate: " + item.IsPrivate + ", IsStatic: " + item.IsStatic);
+        //}
+        private void AddVehicle() // CODE NOT IN USE REFACTORED. /ToDo constructor get type loop??
         {
             string id;
             bool membership = true;
@@ -140,13 +306,12 @@ namespace Övning5
             try
             {
                 int result = Int32.Parse(wheels);
-                Vehicle newVehicle = new(id, color, result);
+                Airplane newVehicle = new(id, color, result, 6);
                 MyGarage.ParkVehicle(newVehicle);
             }
             catch (NullReferenceException)
             {
                 Ui.Print("Vehicle could not be created");
-
             }
 
 
