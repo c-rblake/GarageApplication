@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Övning5
 {
-    internal class GarageHandler
+    internal class GarageHandler: IHandler
     {
 
         private readonly IConsoleUI Ui;
@@ -20,8 +20,9 @@ namespace Övning5
         {
             Ui = ui;
         }
+        
 
-        internal void Run()
+        public void Run()
         {
             
             Ui.Print("Welcome to Garage 1.0");
@@ -297,8 +298,6 @@ namespace Övning5
             }
 
         }
-
-
 
 
     }
