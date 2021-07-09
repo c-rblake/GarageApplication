@@ -14,7 +14,8 @@ namespace Övning5
         public Garage<Vehicle> MyGarage;
         int capacity;
         private bool garageSeeded = false;
-        
+        HashSet<string> uniqueList = new HashSet<string>();
+
         public GarageHandler(IConsoleUI ui)
         {
             Ui = ui;
@@ -89,7 +90,8 @@ namespace Övning5
                         }
                         catch (NullReferenceException)
                         {
-                            Ui.Print("More vehicles could not be found");
+                            Ui.Print("Null Exception Not handeled in membership test");
+                            
                             break;
                         }
                     default:
@@ -105,12 +107,35 @@ namespace Övning5
 
         private void AddVehicle()
         {
-            Ui.Print("please enter the ID of the Vehicle");
-            string id = Ui.ReadKey();
+            string id;
+            bool membership = true;
+            do
+            {
+                Ui.Print("please enter the ID of the Vehicle");
+                id = Ui.ReadKey();
+                try
+                {
+                    membership = MyGarage.Any(a => a.Id == id);
+                }
+                catch (NullReferenceException)
+                {
+                    membership = false;
+                }
+                   
+                //membership =  true;
+                if (membership)
+                {
+                    Ui.Print("That ID is already Taken. Try another like password123.");
+                }
+
+            } while (membership);
+            
+            
             Ui.Print("please enter the Color of the Vehicle");
             string color = Ui.ReadKey();
             Ui.Print("please enter the number of wheels of the Vehicle");
             string wheels = Ui.ReadKey();
+            
             try
             {
                 int result = Int32.Parse(wheels);
@@ -207,7 +232,7 @@ namespace Övning5
                 MyGarage.ParkVehicle(new Boat("The Ahab", "White", 0, 55));
                 MyGarage.ParkVehicle(new Airplane("Emirates", "White", 32, 4));
                 MyGarage.ParkVehicle(new Bus("ABQ189", "Red", 32, "diesel"));
-                garageSeeded = true;
+
                 Ui.Print("Hit any key to continue");
                 Console.ReadKey();
             }
