@@ -14,10 +14,9 @@ namespace Övning5
         [TestMethod]
         public void CreateVehicle()
         {
-            Vehicle vehicle = new Vehicle("abc123", "green", 6);
+            Car testCar = new Car("abc123", "green", 4, 5);
 
-            Assert.IsTrue(vehicle is Vehicle);
-            
+            Assert.IsTrue(testCar is Vehicle);   
         }
 
         

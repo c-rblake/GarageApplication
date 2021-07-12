@@ -13,7 +13,7 @@ namespace Övning5
     {
         Garage<Vehicle> myGarage = new(5);
 
-        Vehicle testCar = new Vehicle("abc123", "green", 6);
+        Car testCar = new Car("abc123", "green", 4, 5);
 
 
         [TestMethod]

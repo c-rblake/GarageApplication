@@ -14,6 +14,8 @@ namespace Övning5
         public Garage<Vehicle> MyGarage;
         int capacity;
         private bool garageSeeded = false;
+        private bool garageNotFull; 
+
         HashSet<string> uniqueList = new HashSet<string>();
 
         public GarageHandler(IConsoleUI ui)
@@ -34,7 +36,7 @@ namespace Övning5
                 string choice = Ui.ReadKey();
                 switch(choice)
                 {
-                    case "0":
+                    case "0": // MainMenuEnum.Exit but extra conversions.
                         Environment.Exit(0);
                         break;
                     case "1":
@@ -111,36 +113,49 @@ namespace Övning5
 
         private void VehicleCreation()
         {
-            Ui.createVehicle();
-            string input = Ui.ReadKey();
-            switch(input)
+            if((MyGarage.Size - MyGarage.Count) > 0)
             {
-                case "0":
-                    Environment.Exit(0);
-                    break; // CANNOT REUSE VARIABLE NAMES HERE FOR DIFFERENT CASES...
-                case "1": // GET INT Would be better to get Constructor properties and run through.. // Todo http://dotnetpattern.com/csharp-reflection-constructors
-                    string id = GetID(); // GetString and Get int. Id is different because of check in current garage.
-                    string color = GetColor();
-                    int wheels = GetInt("Wheels"); 
-                    int engines = GetInt("Engines");
-                    Airplane airplane = new(id, color, wheels, engines);
-                    MyGarage.ParkVehicle(airplane);
-                    break;
-                case "2":
-                    var (a,b,c,d) = MakeVehicle("Wheels", "CylinderVolume");
-                    Boat myBoat = new(a, b, c, d);
-                    MyGarage.ParkVehicle(myBoat);
-                    break;
-                case "3":
-                    MakeVehicleTwo("Wheels", "b");
-                    break;
-                case "4":
-                    MakeVehicleTwo("Wheels", "c");
-                    break;
-                case "5":
-                    MakeVehicleTwo("Wheels", "m");
-                    break;
+                Ui.createVehicle();
+                string input = Ui.ReadKey();
 
+                // SÄTTA TUPPLE RETURN FIELDS HÄR ?? /Todo
+                //var a; går sådär bra att göra. 
+                //string id; några går bra att få till med tuple på detta sätt. id,color = return (string id, string color)
+
+                switch (input)
+                {
+                    // Tuple field could go here?
+                    case "0":
+                        Environment.Exit(0);
+                        break; // CANNOT REUSE VARIABLE NAMES HERE FOR DIFFERENT CASES...
+                    case "1": // GET INT Would be better to get Constructor properties and run through.. // Todo http://dotnetpattern.com/csharp-reflection-constructors
+                        string id = GetID(); // GetString and Get int. Id is different because of check in current garage.
+                        string color = GetColor();
+                        int wheels = GetInt("Wheels");
+                        int engines = GetInt("Engines");
+                        Airplane airplane = new(id, color, wheels, engines);
+                        MyGarage.ParkVehicle(airplane);
+                        break;
+                    case "2":
+                        var (a, b, c, d) = MakeVehicle("Wheels", "CylinderVolume");
+                        Boat myBoat = new(a, b, c, d);
+                        MyGarage.ParkVehicle(myBoat);
+                        break;
+                    case "3":
+                        MakeVehicleTwo("Wheels", "b");
+                        break;
+                    case "4":
+                        MakeVehicleTwo("Wheels", "c");
+                        break;
+                    case "5":
+                        MakeVehicleTwo("Wheels", "m");
+                        break;
+
+                }
+            }
+            else
+            {
+                Ui.Print("Garage is full, try to remove vehicle");
             }
         }
 

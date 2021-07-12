@@ -6,7 +6,7 @@ namespace Övning5
 {
     public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
-        static UI ui = new UI();
+        ConsoleUI ui = new ConsoleUI();
         /* #region Private Fields */
         private int count;
         private readonly T[] vehicles;
